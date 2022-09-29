@@ -1,8 +1,11 @@
+import java.util.Scanner;
+
 public class ChatBot {
 
     // instance variables
     private String name;
     private int number;
+    Scanner scan = new Scanner(System.in);
 
     // constructor
     public ChatBot(String chatBotName, int faveNum) {
@@ -43,6 +46,26 @@ public class ChatBot {
     // method that RETURNS a goodbye message as a String -- note there is no printing here!
     public String goodbye() {
         return "It was nice talking with you! Have a great day! Sincerely, " + name;
+    }
+
+    // method that engages the user in a game of guess the number
+    public void guessMyFavorite() {
+        int guess = number - 1;
+        while (!isFaveNum(guess)) {
+            System.out.print("Guess my favorite number! ");
+            guess = scan.nextInt();
+            scan.nextLine();
+            if (isFaveNum(guess)) {
+                System.out.println("Congratulations! You guessed it!");
+            } else {
+                System.out.println("Close! Only " + Math.abs(number - guess) + " away. Try again!");
+            }
+        }
+    }
+
+    // returns whether a number is the favorite number
+    public boolean isFaveNum(int num) {
+        return number == num;
     }
 }
 
